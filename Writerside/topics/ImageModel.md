@@ -117,7 +117,50 @@
 필터를 180도 뒤집어서 연산하며 상관 연산과의 차이점은 커널을 뒤집느냐 안 뒤집느냐 차이임. 엣지 검출에 주로 사용
 ![Convolution FIlter.jpg](./images/Convolution FIlter.jpg)
 
+#### Gaussian Filter
+가우시안 적용하여 평균과 분산을 사용. 블러처리를 하며 다루기가 쉬움. 퍼지면 블러, 모으면 원본
+![gaussian.jpg](gaussian.jpg)
+
+#### Edge Filter
+엣지 외에는 날린다.(저주파는 날리고, 고주파는 살린다 -> 0을 전부 삭제해버림)
+- Prewitt
+![prewitt.jpg](prewitt.jpg)
+- Roberts
+![roberts.jpg](roberts.jpg)
+- Laplacian operator: 2번의 미분을 통해 edge 감지, 노이즈에 취약함
+![laplacian.jpg](laplacian.jpg)
+- Laplacian of Gaussain: Laplacian을 보완하기 위한 기법
+- Canny edge detector: 에지 검출 알고리즘이며 opencv의 기본적인 필터
+  1) 가우시안 블러(Gaussian Blur) 적용
+     - 노이즈를 줄이기 위해 가우시안 필터로 스무딩 처리
+  2) Sobel Filter로 gradient 계산
+     - 이미지의 밝기 변화를 계산하기 위해 소벨 필터를 사용한다.
+  3) Non-Maximum Suppression(비최대 억제)
+     - edge 두께를 얇게 하기 위해, gradient 방향에 따라 국소 최대값만 남기고 제거
+  4) 이중 임곗값(Double Thresholding) 적용
+     - edge 가도를 기반으로 강한 에지와 약한 에지 구분
+  5) Edge Tracking by Hysteresis
+     - 임곗값에서 구분된 약한 에지를 확인하고 강한 에지와 연결된 경우 에지로 인정. 나머지는 제거
+
 ## Image Geometry
+### Perspective Pinhole Camera(투영 카메라 모델)
+- 일반적인 카메라는 바늘구멍(pinhole) 카메라 모델을 기반으로 이미지를 투영함.
+- 광선이 광학 중심을 지나면서 이미지 평면에 투영됨.
+- z-축(광축, Optical Axis) 이 이미지 평면과 수직을 이루며 광학 중심을 통과함.
+- 3D가 2D로 압축됨
+![perspective pinhole.jpg](perspective pinhole.jpg)
+
+### Mathematical Model for Pinhole Camera(카메라의 수학적 모델)
+카메라는 3D 세계 좌표 (𝑋 , 𝑌 , 𝑍)를 2D 이미지 평면 상의 좌표 (𝑥 , 𝑦)로 변환하는 역할을 합니다. 
+핀홀 카메라 모델을 사용하면 다음과 같은 수식으로 나타낼 수 있습니다.
+![mathmatical.png](mathmatical.png)
+이 방정식의 의미는 다음과 같습니다
+- 𝑓(초점 거리)만큼 Z축을 따라 떨어진 이미지 평면에 점이 투영됨.
+- 3D 공간에서 Z축 방향으로 멀어질수록 (즉, 𝑍 값이 커질수록) 이미지 좌표에서의 크기가 작아짐 (원근법 효과).
+
+위의 투영 방정식은 비선형적인 형태를 가지고 있습니다. 하지만 동차 좌표(homogeneous coordinates) 를 사용하면 행렬 연산으로 쉽게 변환할 수 있습니다.
+동차 좌표를 사용하면 3D 좌표 (𝑋 , 𝑌 , 𝑍)를 4차원 벡터로 확장할 수 있습니다.
+![Homogeneous notations.jpg](Homogeneous notations.jpg)
 
 ## Image Feature
 

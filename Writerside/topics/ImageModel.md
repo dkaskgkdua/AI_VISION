@@ -119,16 +119,16 @@
 
 #### Gaussian Filter
 가우시안 적용하여 평균과 분산을 사용. 블러처리를 하며 다루기가 쉬움. 퍼지면 블러, 모으면 원본
-![gaussian.jpg](gaussian.jpg)
+![gaussian.jpg](./images/gaussian.jpg)
 
 #### Edge Filter
 엣지 외에는 날린다.(저주파는 날리고, 고주파는 살린다 -> 0을 전부 삭제해버림)
 - Prewitt
-![prewitt.jpg](prewitt.jpg)
+![prewitt.jpg](./images/prewitt.jpg)
 - Roberts
-![roberts.jpg](roberts.jpg)
+![roberts.jpg](./images/roberts.jpg)
 - Laplacian operator: 2번의 미분을 통해 edge 감지, 노이즈에 취약함
-![laplacian.jpg](laplacian.jpg)
+![laplacian.jpg](./images/laplacian.jpg)
 - Laplacian of Gaussain: Laplacian을 보완하기 위한 기법
 - Canny edge detector: 에지 검출 알고리즘이며 opencv의 기본적인 필터
   1) 가우시안 블러(Gaussian Blur) 적용
@@ -148,19 +148,31 @@
 - 광선이 광학 중심을 지나면서 이미지 평면에 투영됨.
 - z-축(광축, Optical Axis) 이 이미지 평면과 수직을 이루며 광학 중심을 통과함.
 - 3D가 2D로 압축됨
-![perspective pinhole.jpg](perspective pinhole.jpg)
+![perspective pinhole.jpg](./images/perspective pinhole.jpg)
 
 ### Mathematical Model for Pinhole Camera(카메라의 수학적 모델)
 카메라는 3D 세계 좌표 (𝑋 , 𝑌 , 𝑍)를 2D 이미지 평면 상의 좌표 (𝑥 , 𝑦)로 변환하는 역할을 합니다. 
-핀홀 카메라 모델을 사용하면 다음과 같은 수식으로 나타낼 수 있습니다.
-![mathmatical.png](mathmatical.png)
+핀홀 카메라 모델을 사용하면 다음과 같은 투영 변환 공식(inhomogeneous coordinates -비동질 좌표)으로 나타낼 수 있습니다.
+![mathmatical.png](./images/mathmatical.png)
 이 방정식의 의미는 다음과 같습니다
 - 𝑓(초점 거리)만큼 Z축을 따라 떨어진 이미지 평면에 점이 투영됨.
 - 3D 공간에서 Z축 방향으로 멀어질수록 (즉, 𝑍 값이 커질수록) 이미지 좌표에서의 크기가 작아짐 (원근법 효과).
 
 위의 투영 방정식은 비선형적인 형태를 가지고 있습니다. 하지만 동차 좌표(homogeneous coordinates) 를 사용하면 행렬 연산으로 쉽게 변환할 수 있습니다.
 동차 좌표를 사용하면 3D 좌표 (𝑋 , 𝑌 , 𝑍)를 4차원 벡터로 확장할 수 있습니다.
-![Homogeneous notations.jpg](Homogeneous notations.jpg)
+![Perspective Projection.jpg](./images/Perspective Projection.jpg)
+
+### Homogeneous Notations(동차표기)
+동차 좌표로 나타낸 것에 회전과 이동을 하는 방식이 아래와 같이 행렬로 표현된다.
+Euclidean transformation(유클리드 변환)이 ratation matrix(회전 행렬)과 평행 이동(translation)으로 이루어진다.
+![Homogeneous Notations.jpg](./images/Homogeneous Notations.jpg)
+
+### final matrix example
+![perspective matrix.jpg](./images/perspective matrix.jpg)
+
+### Camera Calibration(카메라 보정)
+카메라의 내부 및 외부 매개변수(Intrinsic & Extrinsic)를 추정하는 과정이며, 이미지 왜곡을 보정하고 실제 3D 세계에서의 좌표를 올바르게 매핑하는데 필수적이다.
+
 
 ## Image Feature
 

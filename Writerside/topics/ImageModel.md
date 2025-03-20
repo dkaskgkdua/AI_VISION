@@ -6,7 +6,7 @@
 - Digital Image : 연속적인 이미지 f(x,y)를 나타내는 이산화 샘플 f[x,y]를 말함. 각 요소들은 픽셀이라 불림
 
 ### Image Sensing Pipeline
-![sensing pipeline.jpg](./images/sensing pipeline.jpg)
+![sensing pipeline.jpg](./images/sensing_pipeline.jpg)
 
 ### Pinhole Camera & Lens
 - Pinhole
@@ -97,10 +97,10 @@
 ### Linear Filtering
 - 선형 필터링은 이미지의 각 픽셀을 주변 픽셀들과 특정 가중치를 적용하여 새로운 값으로 변환하는 과정이다.
 - 이 과정은 주로 Convolution 연산을 사용하여 수행됨.
-![linear filtering.jpg](./images/linear filtering.jpg)
+![linear filtering.jpg](./images/linear_filtering.jpg)
 
 #### Linear Filter Properties
-![Linear Filter.jpg](./images/Linear Filter.jpg)
+![Linear Filter.jpg](./images/Linear_Filter.jpg)
 - 선형성
   - 덧셈법칙: A*(B1 + B2) = (A*B1) + (A*B2)
   - 스케일링 법칙: A*(B1*B2) = B1*(A*B2)
@@ -111,11 +111,11 @@
 상관 필터는 이미지 필터링에서 특정 패턴을 이미지에서 찾는 연산이며 이미지와 커널을 비교하여 유사한 부분을 찾는다.
 - 필터를 그대로 사용하여 연산
 - 입력 이미지 F(x, y)와 필터 H(u, v)를 그대로 곱하고 더하는 연산(가장 잘 일치 시에 최대)
-![Correlation Filter.jpg](./images/Correlation Filter.jpg)
+![Correlation Filter.jpg](./images/Correlation_Filter.jpg)
 
 #### Convolution Filter
 필터를 180도 뒤집어서 연산하며 상관 연산과의 차이점은 커널을 뒤집느냐 안 뒤집느냐 차이임. 엣지 검출에 주로 사용
-![Convolution FIlter.jpg](./images/Convolution FIlter.jpg)
+![Convolution FIlter.jpg](./images/Convolution_FIlter.jpg)
 
 #### Gaussian Filter
 가우시안 적용하여 평균과 분산을 사용. 블러처리를 하며 다루기가 쉬움. 퍼지면 블러, 모으면 원본
@@ -148,7 +148,7 @@
 - 광선이 광학 중심을 지나면서 이미지 평면에 투영됨.
 - z-축(광축, Optical Axis) 이 이미지 평면과 수직을 이루며 광학 중심을 통과함.
 - 3D가 2D로 압축됨
-![perspective pinhole.jpg](./images/perspective pinhole.jpg)
+![perspective pinhole.jpg](./images/perspective_pinhole.jpg)
 
 ### Mathematical Model for Pinhole Camera(카메라의 수학적 모델)
 카메라는 3D 세계 좌표 (𝑋 , 𝑌 , 𝑍)를 2D 이미지 평면 상의 좌표 (𝑥 , 𝑦)로 변환하는 역할을 합니다. 
@@ -160,15 +160,15 @@
 
 위의 투영 방정식은 비선형적인 형태를 가지고 있습니다. 하지만 동차 좌표(homogeneous coordinates) 를 사용하면 행렬 연산으로 쉽게 변환할 수 있습니다.
 동차 좌표를 사용하면 3D 좌표 (𝑋 , 𝑌 , 𝑍)를 4차원 벡터로 확장할 수 있습니다.
-![Perspective Projection.jpg](./images/Perspective Projection.jpg)
+![Perspective Projection.jpg](./images/Perspective_Projection.jpg)
 
 ### Homogeneous Notations(동차표기)
 동차 좌표로 나타낸 것에 회전과 이동을 하는 방식이 아래와 같이 행렬로 표현된다.
 Euclidean transformation(유클리드 변환)이 ratation matrix(회전 행렬)과 평행 이동(translation)으로 이루어진다.
-![Homogeneous Notations.jpg](./images/Homogeneous Notations.jpg)
+![Homogeneous Notations.jpg](./images/Homogeneous_Notations.jpg)
 
 ### final matrix example
-![perspective matrix.jpg](./images/perspective matrix.jpg)
+![perspective matrix.jpg](./images/perspective_matrix.jpg)
 
 ### Camera Calibration(카메라 보정)
 카메라의 내부 및 외부 매개변수(Intrinsic & Extrinsic)를 추정하는 과정이며, 이미지 왜곡을 보정하고 실제 3D 세계에서의 좌표를 올바르게 매핑하는데 필수적이다.

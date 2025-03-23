@@ -97,7 +97,7 @@
 ### Linear Filtering
 - 선형 필터링은 이미지의 각 픽셀을 주변 픽셀들과 특정 가중치를 적용하여 새로운 값으로 변환하는 과정이다.
 - 이 과정은 주로 Convolution 연산을 사용하여 수행됨.
-![linear filtering.jpg](./images/linear_filtering.jpg)
+<img src="./images/linear_filtering.jpg" width="350" />
 
 #### Linear Filter Properties
 ![Linear Filter.jpg](./images/Linear_Filter.jpg)
@@ -124,11 +124,11 @@
 #### Edge Filter
 엣지 외에는 날린다.(저주파는 날리고, 고주파는 살린다 -> 0을 전부 삭제해버림)
 - Prewitt
-![prewitt.jpg](./images/prewitt.jpg)
+  <img src="./images/prewitt.jpg" width="250" />
 - Roberts
-![roberts.jpg](./images/roberts.jpg)
+  <img src="./images/roberts.jpg" width="250" />
 - Laplacian operator: 2번의 미분을 통해 edge 감지, 노이즈에 취약함
-![laplacian.jpg](./images/laplacian.jpg)
+  <img src="./images/laplacian.jpg" width="350" />
 - Laplacian of Gaussain: Laplacian을 보완하기 위한 기법
 - Canny edge detector: 에지 검출 알고리즘이며 opencv의 기본적인 필터
   1) 가우시안 블러(Gaussian Blur) 적용
@@ -173,6 +173,67 @@ Euclidean transformation(유클리드 변환)이 ratation matrix(회전 행렬)�
 ### Camera Calibration(카메라 보정)
 카메라의 내부 및 외부 매개변수(Intrinsic & Extrinsic)를 추정하는 과정이며, 이미지 왜곡을 보정하고 실제 3D 세계에서의 좌표를 올바르게 매핑하는데 필수적이다.
 
+### Stereo Vision
+두 개의 카메라를 사용하여 3D 공간의 깊이 정보를 추정하는 방법이다. 즉 객체가 얼마나 멀어져 있는가를 보는 것이다.
+- 동작 과정
+  ![stereo_process.jpg](./images/stereo_process.jpg)
+- 깊이 계산 원리
+  ![stereo_computation.jpg](./images/stereo_computation.jpg)
+- 깊이 계산 방법
+  ![stereo_image_reconstruction.jpg](./images/stereo_image_reconstruction.jpg)
+  1. Cost computation
+  2. Cost aggregation
+  3. Graph-cuts(segmentation 과 유사한 알고리즘)
+  4. Iterative refinement
+
 
 ## Image Feature
+### Recognition
+이미지에서 특징을 추출하고 이를 기반으로 객체를 인식하는 과정
 
+#### Kind of Recognition
+- Classification
+- Classfication with localization
+- Object detection
+- Instance segmentation
+
+#### Challenges in Recognition
+- Viewpoint variation: 물체의 각도에 따라 다르게 보임
+- Scale variation: 물체의 크기에 따라 다르게 보임
+- Deformation: 물체의 형태가 변형되어 있을 때
+- Occlusion: 다른 물체에 가려져 있을 때
+- Illumination conditions: 조명에 따라 다르게 보임
+- Background clutter: 배경에 물체가 섞여 있을 때
+- Intra-class variation: 같은 클래스 내에서도 다양한 변화(의자 모양, 색상)
+
+#### 객체 분류에서 통계적 관점
+![object_categorization.jpg](./images/object_categorization.jpg)
+
+### Keypoint(Feature Point) Detector
+딥러닝 이전에 많이 쓰였던 SIFT, SURF 같은 알고리즘의 기반이 되는 개념
+
+#### Harris & LoG
+|-|-|-|
+|항목|Harris Detector|Laplacian of Gaussian(LoG)|
+|목적|Corner Detection|Blob Detection|
+|수학|gradient|Laplacian-미분|
+|Edge|약함|약간 강함|
+|평탄|약함|약함|
+|Cornor|강함|약함|
+|Blob(원형)|약함|강함|
+|Scale|약함|강함|
+
+#### SIFT(Scale-Invariant Feature Transform)
+이미지에서 안정적인 keypoint를 추출하고, 각 keypoint 주변의 특징을 벡터로 표현하는 알고리즘으로,
+회전, 스케일, 조명 변화에 강인한 특징점 추출에 사용된다.
+<br>
+
+단계
+1. Scale-space extrema detection
+   다양한 스케일에서 특징점을 찾기 위해 이미지 피라미드를 만들고, DoG(Difference of Gaussian)을 계산하여 특징점을 찾는다.
+2. Keypoint localization
+   후보 keypoint 중 신뢰도 낮은(noise) point 제거
+3. Orientation assignment
+   특징점마다 방향을 부여하여 회전 불변성 확보
+4. Keypoint descriptor
+   keypoint 주변의 특징을 벡터로 추출하여 생성

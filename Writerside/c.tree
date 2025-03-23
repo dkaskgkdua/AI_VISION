@@ -7,4 +7,5 @@
                  start-page="ImageModel.md">
 
     <toc-element topic="ImageModel.md"/>
+    <toc-element topic="CNN.md"/>
 </instance-profile>

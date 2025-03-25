@@ -8,5 +8,5 @@
 
     <toc-element topic="ImageModel.md"/>
     <toc-element topic="ImageForDeepLearning.md"/>
-    <toc-element topic="Object-Detection-and-Segmentation.md"/>
+    <toc-element topic="ObjectDetectionAndSegmentation.md"/>
 </instance-profile>

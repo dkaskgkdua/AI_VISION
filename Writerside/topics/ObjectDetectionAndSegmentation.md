@@ -24,12 +24,11 @@
    - 여러 후보 중 겹치는 영역을 제거하고 가장 높은 점수를 가진 객체를 선택합니다.
    - 객체의 클래스와 위치(Bounding Box 좌표)
 
-
 ## SPPnet(Spatial Pyramid Pooling Network)
 객체 탐지 성능 개선과 속도 향상을 목표로 RCNN을 개선한 모델이다. 전체 이미지에 CNN을 한 번만 적용하고,
 다양한 크기의 후부 영역에 대해 feature map 상에서 pooling을 통해 고정된 크기의 feature를 추출한다.
 
-![Sppnet.png](Sppnet.png)
+![Sppnet.png](./images/Sppnet.png)
 ### 프로세스
 1. 전체 이미지에 CNN을 적용하여 feature map을 추출합니다.
 2. Region Proposal을 통해 후보 영역을 추출합니다.(Selective Search)
@@ -66,7 +65,7 @@
 ## Faster RCNN
 Region Proposal Network(RPN)을 통해 후보 영역을 추출하는 방식으로 속도를 개선한 모델이다.
 
-![Faster_RCNN.png](Faster_RCNN.png)
+![Faster_RCNN.png](./images/Faster_RCNN.png)
 ### 프로세스
 1. CNN image classification task를 pre-training함
 2. RPN을 통해 후보 영역을 추출합니다.
@@ -91,16 +90,15 @@ Region Proposal Network(RPN)을 통해 후보 영역을 추출하는 방식으�
 2. 각 그리드 셀에서 예측
    - A개의 bounding box와 그에 대한 confidence score 예측
    - 각 bounding box는 (x, y, w, h, confidence)를 가짐
-   - ![yolo_box.png](yolo_box.png)
+   - ![yolo_box.png](./images/yolo_box.png)
 3. 출력 shape, Non-Maximum Suppression으로 중복 박스 제거
 
 ### Overlapping 이슈가 있어 Anchor 개념 도입함
-![anchor.png](anchor.png)
+![anchor.png](./images/anchor.png)
 
 - Darknet이라는 아키텍처를 씀
 - Fast RCNN에 비해 정확도가 높은 것까진 아니고 배경 감지를 잘함
 - 분할된 박스에 안들어가면 감지하기 쉽지 않다.
-
 
 ## SSD(Single Shot MultiBox Detector)
 YOLO와 유사하게 단일 네트워크로 객체 탐지를 수행하는 모델이다. 다양한 크기의 feature map을 활용하여 객체의 위치와 클래스를 예측한다.
@@ -129,10 +127,10 @@ Transformer 기반 객체 탐지 모델입니다.
 
 ### DconvNet
 - Max Pooling을 하고 Upsampling을 통해 복원하는데 Unpooling을 해서 max pooling의 결과와 위치 정보를 가지고 나머지 공간은 learnable한 filter로 채워줌
-![DconvNet.png](DconvNet.png)
+![DconvNet.png](./images/DconvNet.png)
 
 ### Instance Segmentation
-![InstanceSegmentation.png](InstanceSegmentation.png)
+![InstanceSegmentation.png](./images/InstanceSegmentation.png)
 
 #### Mask R-CNN
 - Faster R-CNN + Mask branch
